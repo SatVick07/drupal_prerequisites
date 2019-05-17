@@ -1,0 +1,22 @@
+---
+- name: PHP | install php packages
+  apt:
+    name: "{{ php_packages_debian }}"
+    state: "present"
+  when: ansible_os_family == "Debian"
+
+- name: restart php-fpm
+  service: name=php7.2-fpm state=restarted
+  when: ansible_os_family == "Debian"
+
+- name: PHP | install php packages
+  package:
+    name: "{{ php_packages }}"
+    state: "present"
+    enablerepo: "{{ php_enablerepo }}"
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: restart php-fpm
+  service: name=php-fpm state=restarted
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+

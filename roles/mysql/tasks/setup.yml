@@ -1,0 +1,25 @@
+---
+- name: MySQL | Install MySQL
+  apt:
+    name: "{{ mysql_packages_debian }}"
+    state: "present"
+  when: ansible_os_family == "Debian"
+
+- name: Start mysql service
+  service: name=mysql state=restarted
+  when: ansible_os_family == "Debian"
+
+- name: Install MySQL yum repo
+  shell: "yum localinstall -y https://dev.mysql.com/get/mysql80-community-release-el7-1.noarch.rpm"
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Install mysql
+  package:
+    name: "{{ mysql_packages_linux }}"
+    state: "present"
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Start mysql service
+  service: name=mysqld state=restarted
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+

@@ -1,0 +1,28 @@
+---
+- name: Download and install the public signing key
+  command: rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Add repo
+  template:
+     src: elasticsearch.repo
+     dest: /etc/yum.repos.d/elasticsearch.repo
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Install elasticsearch
+  yum: name=elasticsearch state=present
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Start Elasticsearch
+  service: name=elasticsearch state=restarted enabled=yes
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: Download deb package
+  get_url:
+     url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}.deb"
+     dest: /home/Downloads/
+  when: ansible_os_family == "Debian"
+
+- name: Install deb package
+  apt: deb="/home/Downloads/elasticsearch-{{ elasticsearch_version }}.deb"
+  when: ansible_os_family == "Debian"

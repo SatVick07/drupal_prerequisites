@@ -1,0 +1,13 @@
+---
+- name: update the ubuntu server
+  apt: update_cache=yes
+  when: ansible_os_family == "Debian"
+
+- name: Add remi repo
+  sudo: yes
+  shell: "rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ package_version }}.noarch.rpm && rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-{{ package_version }}.rpm"
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
+
+- name: update the CentOS or RHEL server
+  yum: update_cache=yes
+  when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"

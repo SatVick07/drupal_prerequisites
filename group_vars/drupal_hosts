@@ -1,0 +1,13 @@
+---
+db_name: drupal
+db_user: drupal_user
+db_password: Vicky@1996
+
+php_version: 72
+#package_version for remi repo
+package_version: 7
+
+nginx_port: 80
+drupal_path: /var/www/html/drupal
+
+elasticsearch_version: 6.x

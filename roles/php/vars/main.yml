@@ -1,0 +1,43 @@
+---
+php_packages_debian:
+  - php
+  - php-fpm
+  - php-cli
+  - php-common
+  - php-curl
+  - php-json
+  - php-gd
+  - php-odbc
+  - php-mbstring
+  - php-mysql
+  - php-xmlrpc
+  - php-opcache
+  - php-intl
+  - php-bz2
+  - php-xml
+  - php-mongodb
+  - php-redis
+
+php_packages:
+  - php
+  - php-fpm
+  - php-cli
+  - php-common
+  - php-pecl-apcu
+  - php-pear
+  - php-pdo
+  - php-mysqlnd
+  - php-pgsql
+  - php-pecl-mongodb
+  - php-pecl-memcache
+  - php-pecl-memcached
+  - php-gd
+  - php-mbstring
+  - php-mcrypt 
+  - php-xml
+  - php-curl
+  - php-redis
+  - php-opcache
+
+php_enablerepo: "remi,remi-php{{ php_version }}"
+

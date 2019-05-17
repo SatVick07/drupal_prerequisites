@@ -1,0 +1,9 @@
+---
+mysql_packages_debian:
+   - mysql-common
+   - mysql-server
+   - python-mysqldb
+
+mysql_packages_linux:
+   - mysql-community-server
+   - MySQL-python

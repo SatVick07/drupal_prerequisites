@@ -1,0 +1,13 @@
+---
+- hosts: drupal_hosts
+  sudo: yes
+  roles:
+          # - update
+          # - php
+          #- mysql
+    - mongo
+    - redis
+    - nginx
+    - java
+      #    - elasticsearch
+
