@@ -5,9 +5,9 @@
           # - update
           # - php
           #- mysql
-    - mongo
-    - redis
-    - nginx
+          # - mongo
+          #- redis
+          # - nginx
     - java
-      #    - elasticsearch
+    - elasticsearch
 

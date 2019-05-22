@@ -17,12 +17,26 @@
   service: name=elasticsearch state=restarted enabled=yes
   when: ansible_os_family == "CentOS" or ansible_os_family == "RedHat"
 
-- name: Download deb package
-  get_url:
-     url: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}.deb"
-     dest: /home/Downloads/
+- name: HTTPS APT transport for Elasticsearch repository.
+  apt:
+    name: apt-transport-https
+    state: present
   when: ansible_os_family == "Debian"
 
-- name: Install deb package
-  apt: deb="/home/Downloads/elasticsearch-{{ elasticsearch_version }}.deb"
+- name: Add Elasticsearch apt key.
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
   when: ansible_os_family == "Debian"
+
+- name: Add Elasticsearch repository.
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main'
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: INstall Elasticsearch
+  apt: name=elasticsearch state=present
+  when: ansible_os_family == "Debian"
+
