@@ -6,7 +6,7 @@
 - name: Copy config file
   template:
      src: default.conf
-     dest: /etc/nginx/sites-enabled/default.conf
+     dest: /etc/nginx/sites-enabled/default
   notify: restart nginx
   when: ansible_os_family == "Debian" 
 
